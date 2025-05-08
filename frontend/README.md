@@ -6,10 +6,10 @@ This is the **frontend** prototype of the KitchnSync Kitchen Display System (KDS
 
 ##  Tech Stack
 
-- **React.js** – Component-based UI
-- **Vite** – Fast front-end tooling
+- **React.js** – User Interface
+- **Vite** – Fast front-end tool
 - **Tailwind CSS** – Styling (dark mode default)
-- **Socket.IO (Client)** – Real-time updates
+- **Socket.IO (Client)** – Real time updates
 - **Context API** – View and Sidebar
 
 ---
