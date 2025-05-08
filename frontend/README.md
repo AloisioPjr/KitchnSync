@@ -29,7 +29,7 @@ cd kitchnsync
 ```bash
 npm install
 ```
-### 4. Run in Depelopment Mode
+### 4. Run in Development Mode
 ```bash
 npm run dev
 ```
