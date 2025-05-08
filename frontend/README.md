@@ -23,7 +23,7 @@ git clone https://github.com/AloisioPjr/KitchnSync.git
 ```
 ### 2. Navigate to the Repository
 ```bash
-cd kitchnsync
+cd KitchnSync
 ```
 ### 3. Install Dependencies
 ```bash
