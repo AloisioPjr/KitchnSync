@@ -1,5 +1,5 @@
 # KitchnSync
 
-Got to KitchnSync > [frontend](https://github.com/AloisioPjr/KitchnSync/tree/main/frontend)
+Go to KitchnSync > [frontend](https://github.com/AloisioPjr/KitchnSync/tree/main/frontend)
 
 and follow the steps there
