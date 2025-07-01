@@ -1,0 +1,4 @@
+admin
+MongoDBPassword
+
+mongodb+srv://admin:MongoDBPassword@cluster0.3vueq6t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
