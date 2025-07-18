@@ -1,6 +1,5 @@
 @tailwind base;
 @tailwind components;
-<<<<<<< HEAD
 @tailwind utilities;
 
 @keyframes morph-in {
@@ -19,6 +18,3 @@
 .animate-morph-in {
   animation: morph-in 0.6s ease-out forwards;
 }
-=======
-@tailwind utilities;
->>>>>>> aa1c45dbaaebb36632473801faa758bfddf8cfbe

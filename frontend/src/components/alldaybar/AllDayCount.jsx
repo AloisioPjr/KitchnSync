@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from "react";
 import { SidebarContext } from "../../context/SidebarContext";
 import { fetchOrders } from "../../services/api";
-
+import { ThemeContext } from "../../context/ThemeContext";
 // Groups order items by course type (e.g. Starters) and course status (on hold or away)
 const groupItemsByCourseTypeAndCourseStatus = (orders) => {
   const result = {};
@@ -39,6 +38,7 @@ const courseTypeOrder = ["Starters", "Mains", "Desserts"]; // Define the order o
 
 const AllDayCount = () => {
   const { isCollapsed } = useContext(SidebarContext); // Sidebar visibility control
+   const { isDark } = useContext(ThemeContext);
   const [allDayData, setAllDayData] = useState({}); // State to hold grouped data
 
   // Fetch and group order data on mount and every second
@@ -62,84 +62,35 @@ const AllDayCount = () => {
   const sortedSections = courseTypeOrder.filter((key) =>
     allDayData.hasOwnProperty(key)
   );
-=======
-import React, { useContext } from "react";
-import { SidebarContext } from "../../context/SidebarContext";
 
-const mockData = {
-  Starters: {
-    "Soup of the Day": { "": { onHold: 3, away: 1 } },
-    "Prawn Cocktail": { "": { onHold: 2, away: 4 } },
-  },
-  Mains: {
-    Striploin: {
-      Rare: { onHold: 1, away: 2 },
-      Medium: { onHold: 0, away: 3 },
-    },
-    Haddock: {
-      "With Chips": { onHold: 0, away: 1 },
-    },
-  },
-  Desserts: {
-    "Chocolate Tart": {
-      "To Share": { onHold: 1, away: 0 },
-    },
-  },
-};
-
-const AllDayCount = () => {
-  const { isCollapsed } = useContext(SidebarContext);
->>>>>>> aa1c45dbaaebb36632473801faa758bfddf8cfbe
-
-  return (
+   return (
     <div
-      className={`bg-gray-800 text-white transition-all duration-300 h-full overflow-y-auto p-4 border-r border-gray-700 ${
+      className={`transition-all duration-300 h-full overflow-y-auto p-4 border-r ${
         isCollapsed ? "w-0 opacity-0" : "w-64 opacity-100"
-      }`}
+      } ${isDark ? "bg-gray-800 text-white border-gray-700" : "bg-gray-100 text-black border-gray-400"}`}
     >
-<<<<<<< HEAD
       <div className="font-bold text-lg mb-4">TOTAL COUNT</div>
-      {/* Iterate through each section (e.g., Starters, Mains) */}
 
       {sortedSections.map((section) => (
         <div key={section} className="mb-4">
-          {/* Section heading (e.g., Starters) */}
-          <div className="font-semibold text-yellow-400 mb-1">{section}</div>
+          <div className={`font-semibold mb-1 ${isDark ? "text-yellow-400" : "text-yellow-600"}`}>
+            {section}
+          </div>
           <div className="space-y-1 pl-2">
             {Object.entries(allDayData[section]).map(([itemName, variants]) => (
               <div key={itemName}>
-                {/* Item name (e.g., Striploin) */}
-=======
-      <div className="font-bold text-lg mb-4">ALLDAY COUNT</div>
-
-      {Object.entries(mockData).map(([section, items]) => (
-        <div key={section} className="mb-4">
-          <div className="font-semibold text-yellow-400 mb-1">{section}</div>
-          <div className="space-y-1 pl-2">
-            {Object.entries(items).map(([itemName, variants]) => (
-              <div key={itemName}>
->>>>>>> aa1c45dbaaebb36632473801faa758bfddf8cfbe
                 <div className="font-medium">{itemName}</div>
-                <div className="text-sm pl-2 text-gray-300 space-y-1">
+                <div className={`text-sm pl-2 ${isDark ? "text-gray-300" : "text-gray-700"} space-y-1`}>
                   {Object.entries(variants).map(([variant, qty]) => (
                     <div key={variant}>
-<<<<<<< HEAD
-                      {/* Optional label (e.g., Rare, Extra Spicy) */}
                       {variant && <span>{variant} &gt; </span>}
-                      {/* Show on hold count in blue */}
-                      <span className="text-blue-400">
-                        {qty.onHold} on hold
-                      </span>
-                      ,{" "}
-                      {/* Show away count in green */}
-                      <span className="text-green-400">
-                        {qty.away} away
-                      </span>
-=======
-                      {variant && <span>{variant} &gt; </span>}
-                      <span className="text-green-400">{qty.onHold} </span>,{" "}
-                      <span className="text-blue-400">{qty.away}</span>
->>>>>>> aa1c45dbaaebb36632473801faa758bfddf8cfbe
+                     <span className={`${isDark ? "text-blue-400" : "text-blue-600"}`}>
+  {qty.onHold} on hold
+</span>,{" "}
+<span className={`${isDark ? "text-green-400" : "text-green-600"}`}>
+  {qty.away} away
+</span>
+
                     </div>
                   ))}
                 </div>

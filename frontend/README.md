@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -11,7 +10,6 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
 # KitchnSync – Kitchen Display System (Frontend)
 
 This is the **frontend** prototype of the KitchnSync Kitchen Display System (KDS), the kitchen order management UI is optimized to avoid eye strain and focused on the Irish hospitality workflows.
@@ -49,4 +47,3 @@ npm run dev
 ```
 
 The app will be available at [http://localhost:5173](http://localhost:5173)
->>>>>>> aa1c45dbaaebb36632473801faa758bfddf8cfbe

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // React imports
 import React, { createContext, useState } from "react";
 
@@ -17,18 +16,6 @@ export const ViewProvider = ({ children }) => {
   return (
     <ViewContext.Provider value={{ selectedView, setSelectedView, searchQuery, setSearchQuery }}>
       {children} {/* Render all child components inside the context */}
-=======
-import React, { createContext, useState } from "react";
-
-export const ViewContext = createContext();
-
-export const ViewProvider = ({ children }) => {
-  const [selectedView, setSelectedView] = useState("All Orders");
-
-  return (
-    <ViewContext.Provider value={{ selectedView, setSelectedView }}>
-      {children}
->>>>>>> aa1c45dbaaebb36632473801faa758bfddf8cfbe
     </ViewContext.Provider>
   );
 };
