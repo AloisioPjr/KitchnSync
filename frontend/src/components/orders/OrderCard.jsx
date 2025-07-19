@@ -1,7 +1,11 @@
+// Core React and context
 import React, { useContext } from "react";
 import socket from "../../services/socket";
+
+// Theme context (dark or light mode)
 import { ThemeContext } from "../../context/ThemeContext";
 
+// Utility: Choose time-based colour based on how long ago the order was "called away"
 const getTimeColour = (calledAwayAt, isDark) => {
   const now = new Date();
   const called = new Date(calledAwayAt);
@@ -11,6 +15,7 @@ const getTimeColour = (calledAwayAt, isDark) => {
   return isDark ? "bg-red-700" : "bg-red-200";
 };
 
+// Utility: Background colour for course blocks, adjusted for dark/light themes
 const getCourseBackground = (status, isDark) => {
   const light = {
     away: "bg-gray-300",
@@ -29,6 +34,7 @@ const getCourseBackground = (status, isDark) => {
   return isDark ? (dark[status] || dark.default) : (light[status] || light.default);
 };
 
+// Logic: Determine the next course to either "away" or "send"
 const getNextCourseAction = (courses) => {
   const courseOrder = ["Starters", "Mains", "Desserts"];
   for (const type of courseOrder) {
@@ -42,23 +48,25 @@ const getNextCourseAction = (courses) => {
   return null;
 };
 
+// Main component: renders a single order card
 const OrderCard = ({ order }) => {
   const { isDark } = useContext(ThemeContext);
   const isCompleted = order.status === "completed";
   const isCancelled = order.status === "cancelled";
 
+  // Header colour based on order status and theme
   const headerColor =
     isCompleted
       ? isDark ? "bg-gray-500 text-white" : "bg-gray-200 text-black"
       : isCancelled
-? isDark ? "bg-black text-white" : "bg-gray-300 text-black"
-
-      : order.status === "on hold"
-      ? isDark ? "bg-blue-700 text-white" : "bg-blue-200 text-black"
-      : getTimeColour(order.calledAwayAt || order.createdAt, isDark) + (isDark ? " text-white" : " text-black");
+        ? isDark ? "bg-black text-white" : "bg-gray-300 text-black"
+        : order.status === "on hold"
+          ? isDark ? "bg-blue-700 text-white" : "bg-blue-200 text-black"
+          : getTimeColour(order.calledAwayAt || order.createdAt, isDark) + (isDark ? " text-white" : " text-black");
 
   const nextCourseAction = getNextCourseAction(order.courses);
 
+  // Handler: sends or away's the next course based on current status
   const handleCourseAction = () => {
     if (!nextCourseAction) return;
     const { type, action } = nextCourseAction;
@@ -72,6 +80,7 @@ const OrderCard = ({ order }) => {
 
     const isNowComplete = updatedCourses.every(c => c.status === "completed");
 
+    // Emit updated order to backend via socket
     socket.emit("updateOrder", {
       ...order,
       courses: updatedCourses,
@@ -80,6 +89,7 @@ const OrderCard = ({ order }) => {
     });
   };
 
+  // Handler: restarts the order by setting first course to "away", others to "on hold"
   const handleRestartOrder = () => {
     const updatedCourses = order.courses.map((course, idx) =>
       idx === 0 ? { ...course, status: "away" } : { ...course, status: "on hold" }
@@ -96,6 +106,7 @@ const OrderCard = ({ order }) => {
   return (
     <div className={`rounded-lg shadow-md p-4 w-64 flex flex-col justify-between ${isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-black"}`}>
       <div>
+        {/* Order header: number, table, waiter, and timestamps */}
         <div className={`text-sm font-semibold p-2 mb-2 rounded ${headerColor}`}>
           <div>{order.orderNumber} | Table {order.tableNumber} | {order.waiter}</div>
           <div className={`text-xs ${isDark ? "text-gray-200" : "text-gray-600"}`}>
@@ -109,6 +120,7 @@ const OrderCard = ({ order }) => {
           </div>
         </div>
 
+        {/* Render all courses and their items */}
         <div className="text-sm space-y-2">
           {order.courses.map((course, idx) => (
             <div key={idx} className={`p-2 rounded ${getCourseBackground(course.status, isDark)}`}>
@@ -128,6 +140,7 @@ const OrderCard = ({ order }) => {
         </div>
       </div>
 
+      {/* Button: Away or Send the next course */}
       {nextCourseAction && (
         <button
           onClick={handleCourseAction}
@@ -147,6 +160,7 @@ const OrderCard = ({ order }) => {
         </button>
       )}
 
+      {/* Button: Restart the order if it's completed */}
       {isCompleted && (
         <button
           onClick={handleRestartOrder}
