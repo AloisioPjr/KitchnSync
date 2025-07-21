@@ -10,13 +10,16 @@ const getUrgencyLevel = (order) => {
   const diffMins = Math.floor((Date.now() - new Date(timeRef)) / 60000);
 
   if (order.status === "away") {
-    if (diffMins < 10) return 2; // on time
+    if (diffMins < 10) return 2; // late
     if (diffMins < 15) return 1; // nearly late
-    return 0; // late
+    return 0; // on time
   }
 
-  // Completed, cancelled, or on hold come after "away"
-  return 3;
+  if (order.status === "on hold") return 3;     // On Hold
+  if (order.status === "completed") return 4;   // Completed
+  if (order.status === "cancelled") return 5;   // Cancelled
+
+  return 6; // fallback if unexpected status
 };
 
 // Component: OrderGrid

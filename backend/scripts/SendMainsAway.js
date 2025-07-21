@@ -13,7 +13,7 @@ const run = async () => {
     console.log('MongoDB connected');
 
     // Find the specific sample order
-    const order = await Order.findOne({ orderNumber: "#007" });
+    const order = await Order.findOne({ orderNumber: "#010" });
 
     if (!order) {
       console.error("Order not found");

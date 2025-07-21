@@ -13,7 +13,7 @@ const run = async () => {
     console.log('MongoDB connected');
 
     const sampleOrder = new Order({
-      orderNumber: "#018",
+      orderNumber: "#031",
       tableNumber: "9",
       waiter: "peter",
       status: "away",
@@ -32,6 +32,7 @@ const run = async () => {
     });
 
     await sampleOrder.save();
+    
     console.log("Sample order inserted!");
 
   } catch (error) {

@@ -8,27 +8,27 @@ export const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   // State to track whether dark mode is enabled
   const [isDark, setIsDark] = useState(() => {
-    // Load theme preference from localStorage, default to dark mode if not set
-    const saved = localStorage.getItem("theme");
+    // Load theme preference from sessionStorage, default to dark mode if not set
+    const saved = sessionStorage.getItem("theme");
     return saved === "dark" || saved === null;
   });
 
   // Effect: applies or removes the "dark" class to <html> whenever isDark changes
   useEffect(() => {
-    const root = document.documentElement; // Reference to <html> element
+    const root = document.documentElement;
     if (isDark) {
-      root.classList.add("dark"); // Enables TailwindCSS dark mode styles
-      localStorage.setItem("theme", "dark"); // Persist choice
+      root.classList.add("dark");
+      sessionStorage.setItem("theme", "dark"); // Save only for this tab
     } else {
-      root.classList.remove("dark"); // Disable dark mode styles
-      localStorage.setItem("theme", "light"); // Persist choice
+      root.classList.remove("dark");
+      sessionStorage.setItem("theme", "light");
     }
   }, [isDark]);
 
   return (
-    // Provide `isDark` state and the `setIsDark` updater to all children
     <ThemeContext.Provider value={{ isDark, setIsDark }}>
-      {children} {/* Render the nested app inside the context */}
+      {children}
     </ThemeContext.Provider>
   );
 };
+ 
