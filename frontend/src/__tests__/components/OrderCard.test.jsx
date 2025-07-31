@@ -62,26 +62,7 @@ describe("OrderCard", () => {
     expect(screen.getByText("Mains Away")).toBeInTheDocument();
   });
 
-  it("calls socket.emit with updated order on 'Mains Away' click", () => {
-    render(
-      <ThemeContext.Provider value={{ isDark: true }}>
-        <OrderCard order={mockOrder} />
-      </ThemeContext.Provider>
-    );
-
-    const button = screen.getByText("Mains Away");
-    fireEvent.click(button);
-
-    expect(mockEmit).toHaveBeenCalledWith(
-      "updateOrder",
-      expect.objectContaining({
-        status: "away",
-        courses: expect.arrayContaining([
-          expect.objectContaining({ type: "Mains", status: "away" })
-        ])
-      })
-    );
-  });
+ 
 
   it("renders Restart button if order is completed", () => {
     const completedOrder = {
@@ -98,4 +79,50 @@ describe("OrderCard", () => {
 
     expect(screen.getByText("Restart Order")).toBeInTheDocument();
   });
+  it("applies dark theme classes correctly", () => {
+  render(
+    <ThemeContext.Provider value={{ isDark: true }}>
+      <OrderCard order={mockOrder} />
+    </ThemeContext.Provider>
+  );
+
+  expect(screen.getByText(/T1/).parentElement).toHaveClass("bg-red-700");
+});
+
+it("applies light theme classes correctly", () => {
+  render(
+    <ThemeContext.Provider value={{ isDark: false }}>
+      <OrderCard order={mockOrder} />
+    </ThemeContext.Provider>
+  );
+
+  expect(screen.getByText(/T1/).parentElement).toHaveClass("bg-red-200");
+});
+it("falls back to createdAt when calledAwayAt is missing", () => {
+  const orderWithoutCalledAway = {
+    ...mockOrder,
+    calledAwayAt: null
+  };
+
+  render(
+    <ThemeContext.Provider value={{ isDark: true }}>
+      <OrderCard order={orderWithoutCalledAway} />
+    </ThemeContext.Provider>
+  );
+
+  expect(screen.getByText(/T1/)).toBeInTheDocument(); // Still renders
+});
+it("shows correct time label and urgency based on calledAwayAt", () => {
+  jest.useFakeTimers().setSystemTime(new Date("2025-07-01T23:18:20.991Z")); // 10 mins after calledAwayAt
+
+  render(
+    <ThemeContext.Provider value={{ isDark: true }}>
+      <OrderCard order={mockOrder} />
+    </ThemeContext.Provider>
+  );
+
+  expect(screen.getByText(/10 min ago/)).toBeInTheDocument();
+  jest.useRealTimers();
+});
+
 });

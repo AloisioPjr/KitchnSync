@@ -17,7 +17,7 @@ import Completed from "./pages/Completed";
 import Canceled from "./pages/Cancelled";
 
 // Sidebar component for live item totals
-import AllDayCount from "./components/alldaybar/AllDayCount";
+import TotalCount from "./components/totalcountbar/TotalCount";
 
 // Sidebar visibility context
 import { SidebarProvider, SidebarContext } from "./context/SidebarContext";
@@ -53,7 +53,7 @@ const ViewRenderer = () => {
   }
 };
 
-// Layout container that includes the sidebar (AllDayCount) and main content
+// Layout container that includes the sidebar (TotalCount) and main content
 const MainContent = () => {
   const { isCollapsed } = useContext(SidebarContext); // Sidebar visibility toggle
 
@@ -65,7 +65,7 @@ const MainContent = () => {
           isCollapsed ? "w-0 opacity-0" : "w-64 opacity-100"
         } overflow-hidden`}
       >
-        <AllDayCount />
+        <TotalCount />
       </div>
 
       {/* Main scrollable area for pages */}

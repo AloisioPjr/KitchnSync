@@ -6,8 +6,8 @@ import { ThemeContext } from "../../context/ThemeContext";
 const groupItemsByCourseTypeAndCourseStatus = (orders) => {
   const result = {};
 
-  orders.forEach((order) => {
-    order.courses.forEach((course) => {
+  orders.forEach((order) => { // Iterate through each order
+    order.courses.forEach((course) => {// Iterate through each course in the order
       const { status: courseStatus, type: courseType, items } = course;
 
       // Skip courses that are not on hold or away
@@ -16,11 +16,11 @@ const groupItemsByCourseTypeAndCourseStatus = (orders) => {
       // Initialize course type category if it doesn't exist
       if (!result[courseType]) result[courseType] = {};
 
-      items.forEach(({ name, quantity, comment = "" }) => {
+      items.forEach(({ name, quantity, comment = "" }) => {//
         const variant = comment.trim() || ""; // Use comment as variant key
         if (!result[courseType][name]) result[courseType][name] = {};
         if (!result[courseType][name][variant])
-          result[courseType][name][variant] = { onHold: 0, away: 0 };
+          result[courseType][name][variant] = { onHold: 0, away: 0 };// Initialize counts
 
         // Increment either onHold or away quantity based on course status
         result[courseType][name][variant][
@@ -36,10 +36,10 @@ const groupItemsByCourseTypeAndCourseStatus = (orders) => {
 // Optional sorting by visual section order
 const courseTypeOrder = ["Starters", "Mains", "Desserts"]; // Define the order of course types for display
 
-const AllDayCount = () => {
+const TotalCount = () => {
   const { isCollapsed } = useContext(SidebarContext); // Sidebar visibility control
    const { isDark } = useContext(ThemeContext);
-  const [allDayData, setAllDayData] = useState({}); // State to hold grouped data
+  const [totalCountData, setTotalCountData] = useState({}); // State to hold grouped data
 
   // Fetch and group order data on mount and every second
   useEffect(() => { 
@@ -47,7 +47,7 @@ const AllDayCount = () => {
       try {
         const orders = await fetchOrders(); // Get all orders from API
         const grouped = groupItemsByCourseTypeAndCourseStatus(orders); // Group them
-        setAllDayData(grouped); // Update state with grouped data
+        setTotalCountData(grouped); // Update state with grouped data
       } catch (err) {// Handle any errors during fetch
         console.error("Failed to fetch orders:", err); // Log error if fetch fails
       }
@@ -60,7 +60,7 @@ const AllDayCount = () => {
 
   // Filter course types by those present in data
   const sortedSections = courseTypeOrder.filter((key) =>
-    allDayData.hasOwnProperty(key)
+    totalCountData.hasOwnProperty(key)
   );
 
    return (
@@ -77,7 +77,7 @@ const AllDayCount = () => {
             {section}
           </div>
           <div className="space-y-1 pl-2">
-            {Object.entries(allDayData[section]).map(([itemName, variants]) => (
+            {Object.entries(totalCountData[section]).map(([itemName, variants]) => (
               <div key={itemName}>
                 <div className="font-medium">{itemName}</div>
                 <div className={`text-sm pl-2 ${isDark ? "text-gray-300" : "text-gray-700"} space-y-1`}>
@@ -103,4 +103,4 @@ const AllDayCount = () => {
   );
 };
 
-export default AllDayCount;
+export default TotalCount;

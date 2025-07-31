@@ -13,7 +13,7 @@ const run = async () => {
     console.log('MongoDB connected');
 
     const sampleOrder = new Order({
-      orderNumber: "#031",
+      orderNumber: "#032",
       tableNumber: "9",
       waiter: "peter",
       status: "away",

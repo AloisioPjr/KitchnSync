@@ -50,6 +50,8 @@ const getNextCourseAction = (courses) => {
 
 // Main component: renders a single order card
 const OrderCard = ({ order }) => {
+
+  // Use theme context to determine dark mode
   const { isDark } = useContext(ThemeContext);
   const isCompleted = order.status === "completed";
   const isCancelled = order.status === "cancelled";

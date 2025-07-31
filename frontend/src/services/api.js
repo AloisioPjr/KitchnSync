@@ -1,5 +1,5 @@
 // Base URL for the backend API
-const API_URL = "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 // Fetch all orders from the backend
 export const fetchOrders = async () => {

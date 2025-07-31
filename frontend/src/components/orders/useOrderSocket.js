@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 // WebSocket service for real-time communication
 import socket from "../../services/socket";
-
+import { playBeep } from "../../utils/beep"; // Import sound utility
 
 const useOrderSocket = (statusFilter, courseFilter) => {
   // State to hold the list of filtered orders
@@ -31,8 +31,10 @@ const useOrderSocket = (statusFilter, courseFilter) => {
     const handleInitial = (data) => setOrders(filterFn(data));
 
     // Handle individual order updates
-    const handleUpdate = (data) => setOrders(filterFn(data));
-
+    const handleUpdate = (data) => {
+      setOrders(filterFn(data));
+      playBeep(); // Play sound when an update is received
+    };
     // Register WebSocket listeners
     socket.on("initialOrders", handleInitial);
     socket.on("orderUpdated", handleUpdate);
