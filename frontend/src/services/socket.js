@@ -6,4 +6,4 @@ const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:5000";
 const socket = io(SOCKET_URL);
 
 // Export the socket instance for use throughout the app
-export default socket;
+export default socket; 
