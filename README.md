@@ -59,9 +59,17 @@ npm run dev
  cd backend
 npm test
 ```
-
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-4.png)
+## All Orders Page
+![All Orders Page](image.png)
+## Away Page
+![Away Page](image-1.png)
+## Total Count Sidebar
+![Total Count Sidebar](image-2.png)
+## Away Page
+![Away Page](image-3.png)
+## Completed Page
+![Completed Page](image-4.png)
+## Cancelled Page
+![Cancelled Page](image-5.png)
+## Settings Page
+![Settings Page](image-6.png)
