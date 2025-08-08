@@ -13,7 +13,7 @@ The system features a React frontend and Node.js backend, using Socket.io for li
 
 ---
 
-## ✅ Prerequisites
+##  Prerequisites
 
 Before running the project, make sure you have:
 
@@ -24,7 +24,7 @@ Before running the project, make sure you have:
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Clone the Repository
 
@@ -54,7 +54,7 @@ npm run dev
 
  http://54.226.219.54
 
- ##To Run Tests
+ ## To Run Tests
 ```bash
  cd backend
 npm test
