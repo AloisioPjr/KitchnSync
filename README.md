@@ -1,15 +1,13 @@
 #  KitchnSync – Kitchen Display System (KDS)
 
-KitchnSync is a full-stack web-based Kitchen Display System (KDS) designed specifically for the Irish Restaurant Sector. It provides real-time updates for kitchen staff to manage food orders, reduce communication errors, and streamline service.
+The KitchnSync is a full-stack web-based Kitchen Display System (KDS) serves as the central order display for kitchen staff, replacing traditional paper tickets. It received orders from the restaurant’s Point of Sale (POS) system. The system  provides real-time updates for kitchen staff/chefs to view all active orders, update their status (e.g., mark courses as sent out), put orders on hold or recall them as needed, and see a summary of all items across orders (“Total count"). The system has the functionality of filtering out specific sections and show the orders according to the preconfigured settings.
 
 The system features a React frontend and Node.js backend, using Socket.io for live updates and MongoDB for data storage.
 
 ---
-
 ## Project Structure
 ![Architecture](image-7.png)
 ---
-
 ##  Prerequisites
 
 Before running the project, make sure you have:
