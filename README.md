@@ -3,9 +3,9 @@
 
 #  KitchnSync – Real-Time Kitchen Display System (KDS)
 
-KitchnSync is a full-stack web-based Kitchen Display System (KDS) designed specifically for the Irish hospitality sector. It provides real-time updates for kitchen staff to manage food orders, reduce communication errors, and streamline service.
+KitchnSync is a full-stack web-based Kitchen Display System (KDS) designed specifically for the Irish Restaurant Sector. It provides real-time updates for kitchen staff to manage food orders, reduce communication errors, and streamline service.
 
-The system features a React frontend and Node.js backend, using WebSockets for live updates and MongoDB for data storage.
+The system features a React frontend and Node.js backend, using Socket.io for live updates and MongoDB for data storage.
 
 ---
 
@@ -31,27 +31,37 @@ Before running the project, make sure you have:
 ```bash
 git clone https://github.com/your-username/KitchnSync.git
 cd KitchnSync
-
+```
 ### 2.  Set Up the Backend
+```bash
 cd backend
 npm install
-
+```
 Create a .env file in the backend/ directory with the following content:
+```bash
 PORT=5000
 MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/kitchnsync
 npm run dev 
-
+```
 3. Set Up the Frontend
+```bash
 cd frontend
 npm install
 npm run dev
-
+```
 
  Deployment
 
  http://54.226.219.54
 
  ##To Run Tests
-
+```bash
  cd backend
 npm test
+```
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
